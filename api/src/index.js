@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const jwt = require('jwt-simple');
+const morgan = require('morgan');
 
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || '127.0.0.1';
@@ -39,6 +40,7 @@ const User = mongoose.model('user', new mongoose.Schema({
 // index
 mongoose.connect('mongodb://localhost:todolist/todolist');
 
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
