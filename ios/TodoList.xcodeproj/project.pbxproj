@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4B9020C61E89052500088EA4 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9020C51E89052500088EA4 /* APIEndpoints.swift */; };
+		4B9020C81E8C7FBE00088EA4 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9020C71E8C7FBE00088EA4 /* TableViewController.swift */; };
 		4BF10A091E88F333002728F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF10A081E88F333002728F7 /* AppDelegate.swift */; };
 		4BF10A0B1E88F333002728F7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF10A0A1E88F333002728F7 /* LoginViewController.swift */; };
 		4BF10A0E1E88F333002728F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BF10A0C1E88F333002728F7 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		4A9DE71A1B7B2F2E9D76299B /* Pods-TodoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoList/Pods-TodoList.debug.xcconfig"; sourceTree = "<group>"; };
 		4B9020C51E89052500088EA4 /* APIEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		4B9020C71E8C7FBE00088EA4 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		4BF10A051E88F333002728F7 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF10A081E88F333002728F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BF10A0A1E88F333002728F7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				4BF10A111E88F333002728F7 /* LaunchScreen.storyboard */,
 				4BF10A141E88F333002728F7 /* Info.plist */,
 				4B9020C51E89052500088EA4 /* APIEndpoints.swift */,
+				4B9020C71E8C7FBE00088EA4 /* TableViewController.swift */,
 			);
 			path = TodoList;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				4B9020C61E89052500088EA4 /* APIEndpoints.swift in Sources */,
 				4BF10A0B1E88F333002728F7 /* LoginViewController.swift in Sources */,
 				4BF10A091E88F333002728F7 /* AppDelegate.swift in Sources */,
+				4B9020C81E8C7FBE00088EA4 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
