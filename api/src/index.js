@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const jwt = require('jwt-simple');
 const morgan = require('morgan');
 
+const User = require('./models/user');
+
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || '127.0.0.1';
 
@@ -22,20 +24,6 @@ function tokenForUser(user) {
     iat: new Date().getTime(),
   }, config.secret);
 }
-
-// model
-const validateEmail = email => (/\S+@\S+.\S+/).test(email);
-
-const User = mongoose.model('user', new mongoose.Schema({
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    required: 'Email address is required',
-    validate: [validateEmail, 'Please enter a valid email'],
-  },
-  password: {type: String},
-}));
 
 // index
 mongoose.connect('mongodb://localhost:todolist/todolist');
