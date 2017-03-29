@@ -15,19 +15,23 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var emailTextField: UITextField!
 
   @IBOutlet weak var passwordTextField: UITextField!
-  
+
   @IBAction func signInButtonPress(_ sender: Any) {
+    postCredentials(endpoint: APIEndpoints.signinURL)
   }
-  
-  
+
   @IBAction func signUpButtonPress(_ sender: Any) {
+    postCredentials(endpoint: APIEndpoints.signupURL)
+  }
+
+  func postCredentials(endpoint: String) {
     if let email = emailTextField.text, let password = passwordTextField.text {
       let parameters: Parameters = [
         "email": email,
         "password": password,
       ]
       print(parameters)
-      Alamofire.request(APIEndpoints.signupURL, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+      Alamofire.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
         .responseJSON { response in
           switch response.result {
           case .success:
@@ -45,5 +49,4 @@ class LoginViewController: UIViewController {
       }
     }
   }
-  
 }

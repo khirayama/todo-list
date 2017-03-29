@@ -11,4 +11,5 @@ import Foundation
 class APIEndpoints {
   private static let baseURL = "http://localhost:3000/v1"
   static let signupURL = "\(baseURL)/signup"
+  static let signinURL = "\(baseURL)/signin"
 }
