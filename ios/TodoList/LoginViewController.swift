@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
               defaults.setValue(json["token"].string, forKey: "jwtToken")
               defaults.setValue(json["userId"].string, forKey: "userId")
 
-              print(defaults.value(forKey: "jwtToken")!)
+//              print(defaults.value(forKey: "jwtToken")!)
             }
           case .failure(let error):
             print(error)
