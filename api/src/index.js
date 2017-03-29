@@ -1,11 +1,14 @@
 const http = require('http');
 
+const passport = require('passport');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const jwt = require('jwt-simple');
 const morgan = require('morgan');
 
+const passportService = require('./services/passport');
 const User = require('./models/user');
 
 const port = process.env.PORT || 3000;
@@ -13,6 +16,8 @@ const host = process.env.HOST || '127.0.0.1';
 
 const app = express();
 const server = http.createServer(app);
+
+const requireSignin = passport.authenticate('local', {session: false});
 
 const config = {
   secret: 'This is secret',
@@ -70,7 +75,7 @@ function handleSignin(req, res, next) {
 
 app.use('/v1', new express.Router()
   .post('/signup', handleSignup)
-  .post('/signin', handleSignin)
+  .post('/signin', [requireSignin, handleSignin])
 );
 
 console.log(`listening on http://${host}:${port}`);

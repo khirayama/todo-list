@@ -17,18 +17,22 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', (next) => {
   const user = this;
   console.log(user);
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      return next(err);
-    }
-    bcrypt.hash(user.password, salt, null, (err, hash) => {
+  if (user.isNew) {
+    bcrypt.genSalt(10, (err, salt) => {
       if (err) {
         return next(err);
       }
-      user.password = hash;
-      next();
+      bcrypt.hash(user.password, salt, null, (err, hash) => {
+        if (err) {
+          return next(err);
+        }
+        user.password = hash;
+        next();
+      });
     });
-  });
+  } else {
+    next();
+  }
 });
 
 userSchema.methods.comparePassword = (candidatePassword, callback) => {

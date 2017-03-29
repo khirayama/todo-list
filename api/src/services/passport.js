@@ -31,4 +31,4 @@ const localLogin = new LocalStrategy(loginOption, (email, password, done) => {
   });
 });
 
-passport.user(localLogin);
+passport.use(localLogin);
