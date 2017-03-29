@@ -28,7 +28,21 @@ class LoginViewController: UIViewController {
       ]
       print(parameters)
       Alamofire.request(APIEndpoints.signupURL, method: .post, parameters: parameters, encoding: JSONEncoding.default)
-        .responseJSON { response in print(response)}
+        .responseJSON { response in
+          switch response.result {
+          case .success:
+            if let value = response.result.value {
+              let defaults = UserDefaults.standard
+              let json = JSON(value)
+              defaults.setValue(json["token"].string, forKey: "jwtToken")
+              defaults.setValue(json["userId"].string, forKey: "userId")
+
+              print(defaults.value(forKey: "jwtToken")!)
+            }
+          case .failure(let error):
+            print(error)
+        }
+      }
     }
   }
   
