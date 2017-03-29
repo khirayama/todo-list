@@ -44,38 +44,45 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/v1', new express.Router()
-  .post('/signup', (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
+function handleSignup(req, res, next) {
+  const email = req.body.email;
+  const password = req.body.password;
 
-    if (!email || !password) {
-      return res.status(422).send({error: 'You must provide email and password'});
+  if (!email || !password) {
+    return res.status(422).send({error: 'You must provide email and password'});
+  }
+
+  User.findOne({email}, (err, existingUser) => {
+    if (err) {
+      return next(err);
     }
 
-    User.findOne({email}, (err, existingUser) => {
-      if (err) {
+    if (existingUser) {
+      return res.status(422).send({error: 'Email is in use.'});
+    }
+
+    const user = new User({email, password});
+
+    user.save(err_ => {
+      if (err_) {
+        if (err_.errors && err_.errors.email) {
+          return res.status(422).send({error: err_.errors.email.message});
+        }
         return next(err);
       }
 
-      if (existingUser) {
-        return res.status(422).send({error: 'Email is in use.'});
-      }
-
-      const user = new User({email, password});
-
-      user.save(err_ => {
-        if (err_) {
-          if (err_.errors && err_.errors.email) {
-            return res.status(422).send({error: err_.errors.email.message});
-          }
-          return next(err);
-        }
-
-        res.json({token: tokenForUser(user), userId: user._id});
-      });
+      res.json({token: tokenForUser(user), userId: user._id});
     });
-  })
+  });
+}
+
+function handleSignin(req, res, next) {
+  res.json({token: tokenForUser(req.user), userId: req.user._id});
+}
+
+app.use('/v1', new express.Router()
+  .post('/signup', handleSignup)
+  .post('/signin', handleSignin)
 );
 
 console.log(`listening on http://${host}:${port}`);
