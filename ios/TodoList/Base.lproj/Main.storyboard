@@ -104,7 +104,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="TODOs" id="SE4-Of-Swk">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="JF6-W7-4oL"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="JF6-W7-4oL">
+                            <connections>
+                                <action selector="logoutButtonPress:" destination="M5c-mL-KSt" id="7mF-5K-dnM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49X-78-cTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
