@@ -11,6 +11,10 @@ import UIKit
 class TableViewController: UITableViewController {
 
   @IBAction func logoutButtonPress(_ sender: Any) {
+    let defaults = UserDefaults.standard
+    defaults.removeObject(forKey: "jstToken")
+    
+    self.navigationController!.performSegue(withIdentifier: "showLoginViewController", sender: nil)
   }
 
   override func viewDidLoad() {

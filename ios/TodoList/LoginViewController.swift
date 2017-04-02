@@ -40,13 +40,17 @@ class LoginViewController: UIViewController {
               let json = JSON(value)
               defaults.setValue(json["token"].string, forKey: "jwtToken")
               defaults.setValue(json["userId"].string, forKey: "userId")
-
-//              print(defaults.value(forKey: "jwtToken")!)
+              self.navigationController!.performSegue(withIdentifier: "showTodosViewController", sender: nil)
             }
           case .failure(let error):
             print(error)
         }
       }
     }
+  }
+  
+  override func viewDidLoad() {
+    self.viewDidLoad()
+    self.navigationItem.hidesBackButton = true;
   }
 }

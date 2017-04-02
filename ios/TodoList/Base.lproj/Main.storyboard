@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-395" y="-391"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Login-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
@@ -71,6 +71,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Login" id="c1R-fV-x7e"/>
                     <connections>
                         <outlet property="emailTextField" destination="5zr-Ea-OFS" id="oBE-IL-sZF"/>
                         <outlet property="passwordTextField" destination="cF7-vo-qFC" id="Dj0-wN-pIY"/>
