@@ -25,32 +25,36 @@ class LoginViewController: UIViewController {
   }
 
   func postCredentials(endpoint: String) {
+    let loader = SwiftLoading()
+    loader.showLoading()
+    
     if let email = emailTextField.text, let password = passwordTextField.text {
       let parameters: Parameters = [
         "email": email,
         "password": password,
-      ]
+        ]
       print(parameters)
-      Alamofire.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
-        .responseJSON { response in
-          switch response.result {
-          case .success:
-            if let value = response.result.value {
-              let defaults = UserDefaults.standard
-              let json = JSON(value)
-              defaults.setValue(json["token"].string, forKey: "jwtToken")
-              defaults.setValue(json["userId"].string, forKey: "userId")
-              self.navigationController!.performSegue(withIdentifier: "showTodosViewController", sender: nil)
-            }
-          case .failure(let error):
-            print(error)
+      Alamofire.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+        switch response.result {
+        case .success:
+          if let value = response.result.value {
+            let defaults = UserDefaults.standard
+            let json = JSON(value)
+            defaults.setValue(json["token"].string, forKey: "jwtToken")
+            defaults.setValue(json["userId"].string, forKey: "userId")
+            
+            self.navigationController!.performSegue(withIdentifier: "showTodosViewController", sender: nil)
+          }
+        case .failure(let error):
+          print(error)
         }
+        loader.hideLoading()
       }
     }
   }
   
   override func viewDidLoad() {
-    self.viewDidLoad()
+    super.viewDidLoad()
     self.navigationItem.hidesBackButton = true;
   }
 }
