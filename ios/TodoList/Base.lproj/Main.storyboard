@@ -122,11 +122,49 @@
                                 <action selector="logoutButtonPress:" destination="M5c-mL-KSt" id="7mF-5K-dnM"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="DhE-X3-hjH">
+                            <connections>
+                                <segue destination="DDl-eF-Dwm" kind="show" id="WPJ-cs-eDO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49X-78-cTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="532" y="348.57571214392806"/>
+        </scene>
+        <!--New Todo-->
+        <scene sceneID="U4s-Oj-6s9">
+            <objects>
+                <viewController id="DDl-eF-Dwm" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="u2p-ST-hRV"/>
+                        <viewControllerLayoutGuide type="bottom" id="GOW-yq-CaN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vjw-jr-dvI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lo8-nT-C9P">
+                                <rect key="frame" x="100" y="107" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hg-Uw-l5f">
+                                <rect key="frame" x="127" y="184" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Todo" id="afc-Ik-Mlq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hw1-c7-xlg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1474" y="349"/>
         </scene>
     </scenes>
 </document>
