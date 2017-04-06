@@ -12,4 +12,7 @@ class APIEndpoints {
   private static let baseURL = "http://localhost:3000/v1"
   static let signupURL = "\(baseURL)/signup"
   static let signinURL = "\(baseURL)/signin"
+  static func newTodoURL (userId: String) -> String {
+    return "\(baseURL)/users/\(userId)/todos/new"
+  }
 }

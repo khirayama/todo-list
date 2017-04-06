@@ -136,7 +136,7 @@
         <!--New Todo-->
         <scene sceneID="U4s-Oj-6s9">
             <objects>
-                <viewController id="DDl-eF-Dwm" sceneMemberID="viewController">
+                <viewController id="DDl-eF-Dwm" customClass="NewTodoViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u2p-ST-hRV"/>
                         <viewControllerLayoutGuide type="bottom" id="GOW-yq-CaN"/>
@@ -156,11 +156,17 @@
                                 <rect key="frame" x="127" y="184" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addButtonPress:" destination="DDl-eF-Dwm" eventType="touchUpInside" id="HWE-9v-1WW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Todo" id="afc-Ik-Mlq"/>
+                    <connections>
+                        <outlet property="newTodoTextField" destination="lo8-nT-C9P" id="bM0-FX-9md"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hw1-c7-xlg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

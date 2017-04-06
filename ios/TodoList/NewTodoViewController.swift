@@ -7,29 +7,57 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class NewTodoViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  
+  @IBOutlet weak var newTodoTextField: UITextField!
+  
+  @IBAction func addButtonPress(_ sender: Any) {
+    let loader = SwiftLoading()
+    loader.showLoading()
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    if let text = newTodoTextField.text {
+      let defaults = UserDefaults.standard
+      let userId = defaults.value(forKey: "userId") as! String
+      let parameters = [
+        "text": text
+      ]
+      Alamofire.request(APIEndpoints.newTodoURL(userId: userId), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+        switch response.result {
+        case .success:
+          if let value = response.result.value {
+            let defaults = UserDefaults.standard
+            let json = JSON(value)
+            
+            if let todosArray = defaults.value(forKey: "todoArray") {
+              let todosArray = NSMutableArray(array: todosArray as! [AnyObject])
+              
+              if let todoText = json["text"].string {
+                todosArray.add(todoText)
+                defaults.setValue(todosArray, forKey: "todosArray")
+              } else {
+                print("Could not get 'text' from JSON")
+              }
+            } else {
+              if let todoText = json["text"].string {
+                defaults.setValue(NSMutableArray(array: [todoText]), forKey: "todosArray")
+              } else {
+                print("Could not get 'text' from JSON")
+              }
+            }
+            
+            self.navigationController!.performSegue(withIdentifier: "showTodosViewController", sender: nil)
+          }
+        case .failure(let error):
+          print(error)
+        }
+        loader.hideLoading()
+      }
+    } else {
+      print("No text!")
+      loader.hideLoading()
     }
-    */
-
+  }
 }
