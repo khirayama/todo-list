@@ -73,9 +73,31 @@ function handleSignin(req, res, next) {
   res.json({token: tokenForUser(req.user), userId: req.user._id});
 }
 
+function handleTodoNew(req, res, next) {
+  User.findById(req.params.userId, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+
+    const text = req.body.text;
+
+    user.todos.push({
+      id: uuid.v4(),
+      text,
+    });
+    user.save(err_ => {
+      if (err_) {
+        return next(err_);
+      }
+      res.json({text});
+    });
+  });
+}
+
 app.use('/v1', new express.Router()
   .post('/signup', handleSignup)
   .post('/signin', [requireSignin, handleSignin])
+  .post('/users/:userId/todos/new', handleTodoNew)
 );
 
 console.log(`listening on http://${host}:${port}`);

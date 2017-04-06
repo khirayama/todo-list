@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
     validate: [validateEmail, 'Please enter a valid email'],
   },
   password: {type: String},
+  todos: {
+    id: {type: String},
+    text: {type: String},
+  },
 });
 
 userSchema.pre('save', (next) => {
