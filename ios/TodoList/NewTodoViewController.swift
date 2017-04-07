@@ -31,7 +31,7 @@ class NewTodoViewController: UIViewController {
             let defaults = UserDefaults.standard
             let json = JSON(value)
             
-            if let todosArray = defaults.value(forKey: "todoArray") {
+            if let todosArray = defaults.value(forKey: "todosArray") {
               let todosArray = NSMutableArray(array: todosArray as! [AnyObject])
               
               if let todoText = json["text"].string {
