@@ -21,10 +21,11 @@ class NewTodoViewController: UIViewController {
     if let text = newTodoTextField.text {
       let defaults = UserDefaults.standard
       let userId = defaults.value(forKey: "userId") as! String
+      let jwtToken = defaults.value(forKey: "jwtToken") as! String
       let parameters = [
         "text": text
       ]
-      Alamofire.request(APIEndpoints.newTodoURL(userId: userId), method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+      Alamofire.request(APIEndpoints.newTodoURL(userId: userId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["authorization": jwtToken]).responseJSON { response in
         switch response.result {
         case .success:
           if let value = response.result.value {
