@@ -5,6 +5,10 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const User = require('../models/user');
 
+const config = {
+  secret: 'This is secret',
+};
+
 const loginOption = {
   usernameField: 'email',
 };

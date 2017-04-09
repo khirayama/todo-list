@@ -1,5 +1,7 @@
 const http = require('http');
 
+const uuid = require('uuid');
+
 const passport = require('passport');
 
 const express = require('express');
@@ -18,6 +20,7 @@ const app = express();
 const server = http.createServer(app);
 
 const requireSignin = passport.authenticate('local', {session: false});
+const requireJwt = passport.authenticate('jwt', {session: false});
 
 const config = {
   secret: 'This is secret',
@@ -74,30 +77,30 @@ function handleSignin(req, res, next) {
 }
 
 function handleTodoNew(req, res, next) {
-  User.findById(req.params.userId, (err, user) => {
-    if (err) {
-      return next(err);
+  const user = req.user;
+
+  if (String(user._id) !== String(req.params.userId)) {
+    return res.status(401).send('Posting to the wrong user');
+  }
+
+  const text = req.body.text;
+
+  user.todos.push({
+    id: uuid.v4(),
+    text,
+  });
+  user.save(err_ => {
+    if (err_) {
+      return next(err_);
     }
-
-    const text = req.body.text;
-
-    user.todos.push({
-      id: uuid.v4(),
-      text,
-    });
-    user.save(err_ => {
-      if (err_) {
-        return next(err_);
-      }
-      res.json({text});
-    });
+    res.json({text});
   });
 }
 
 app.use('/v1', new express.Router()
   .post('/signup', handleSignup)
   .post('/signin', [requireSignin, handleSignin])
-  .post('/users/:userId/todos/new', handleTodoNew)
+  .post('/users/:userId/todos/new', [requireJwt, handleTodoNew])
 );
 
 console.log(`listening on http://${host}:${port}`);
